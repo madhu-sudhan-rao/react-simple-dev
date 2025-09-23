@@ -1,10 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./HomePage.css";
 import Header from "../components/Header";
 import { ThemeContext } from "../App";
 
 function HomePage() {
   const { theme } = useContext(ThemeContext);
+  const [time, setTime] = useState(0);
+  const timerRef = useRef(null);
+
+  const start = () => {
+    if (timerRef.current !== null) return;
+    timerRef.current = setInterval(() => {
+      setTime((t) => t + 1);      
+    }, 1000);
+  };
+
+  const stop = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  };
+
+  const reset = () => {
+    stop();
+    setTime(0);
+  };
+
   return (
     <>
       <title>Home</title>
@@ -159,6 +179,19 @@ function HomePage() {
               Add to Cart
             </button>
           </div>
+        </div>
+        <div className="stopwatch-container">
+          <header>
+            <h2>Stopwatch</h2>
+          </header>
+          <section>
+            <div className="action-buttons">
+              <button onClick={start}>Start</button>
+              <button onClick={stop}>Stop</button>
+              <button onClick={reset}>Reset</button>
+            </div>
+            <div>{time} sec</div>
+          </section>
         </div>
       </div>
     </>
