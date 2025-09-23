@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import { Link } from "react-router";
+import { ThemeContext } from "../App";
 
 function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
+
   return (
     <>
       <div className="header">
@@ -31,6 +39,8 @@ function Header() {
             <div className="cart-quantity">3</div>
             <div className="cart-text">Cart</div>
           </Link>
+
+          <button onClick={toggleTheme}>{theme}</button>
         </div>
       </div>
     </>

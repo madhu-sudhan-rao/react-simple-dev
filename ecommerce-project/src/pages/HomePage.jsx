@@ -1,15 +1,17 @@
-import React from "react";
-import './HomePage.css';
+import React, { useContext } from "react";
+import "./HomePage.css";
 import Header from "../components/Header";
+import { ThemeContext } from "../App";
 
 function HomePage() {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
-    <title>Home</title>
-    <Header />
-    
+      <title>Home</title>
+      <Header />
 
       <div className="home-page">
+        Current theme: {theme}
         <div className="products-grid">
           <div className="product-container">
             <div className="product-image-container">
