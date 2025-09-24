@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import "./Header.css";
 import { Link } from "react-router";
 import { ThemeContext } from "../App";
 
 function Header() {
   const { theme, setTheme } = useContext(ThemeContext);
+  const searchBoxRef = useRef(null);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
   };
+
+  const onSearchButtonClick = () => {
+    searchBoxRef.current.focus();
+  }
 
   return (
     <>
@@ -22,7 +27,10 @@ function Header() {
         </div>
 
         <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" />
+          <button onClick={onSearchButtonClick}>
+            Search
+          </button>
+          <input ref={searchBoxRef} className="search-bar" type="text" placeholder="Search" />
 
           <button className="search-button">
             <img className="search-icon" src="images/icons/search-icon.png" />
